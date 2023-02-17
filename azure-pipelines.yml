@@ -2,16 +2,14 @@
 # Create and test a Python package on multiple Python versions.
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
+variables:
+  pythonVersion: '3.10'
 
 trigger:
 - master
 
 pool:
   vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python310:
-      python.version: '3.10'
 
 stages:
 - stage: Build
@@ -41,7 +39,7 @@ stages:
   - deployment: VMDeploy
     displayName: Web deploy
     environment:
-      name: <environment name>
+      name: python test Environment
       resourceType: VirtualMachine
     strategy:
       runOnce:
